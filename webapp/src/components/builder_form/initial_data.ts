@@ -272,11 +272,11 @@ export const docs = {
         "calls": {
             "/actions/open-file": {
                 "type": "navigate",
-                "navigate_to_url": "https://drive.google.com/file/d/1vujhOtERpFhSv9YgMXgUgGxHm67lbGE_/view?usp=sharing"
+                "navigate_to_url": "https://drive.google.com/file/d/1wzJTEzDX8hVu1li_Fy9u-jzeUu7pxMV9/view?usp=sharing"
             },
             "/actions/share-file": {
                 "type": "ok",
-                "text": "URL to share: https://drive.google.com/file/d/1vujhOtERpFhSv9YgMXgUgGxHm67lbGE_/view?usp=sharing"
+                "text": "URL to share: https://drive.google.com/file/d/1wzJTEzDX8hVu1li_Fy9u-jzeUu7pxMV9/view?usp=sharing"
             },
             "/actions/delete-file": {
                 "type": "ok",

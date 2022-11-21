@@ -1,0 +1,341 @@
+{
+    "$ref": "http://app-view-builder/app-view-builder-frontend.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "AppBinding": {
+            "additionalProperties": false,
+            "properties": {
+                "app_id": {
+                    "type": "string"
+                },
+                "bindings": {
+                    "items": {
+                        "$ref": "http://app-view-builder/app-view-builder-frontend.json"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "form": {
+                    "properties": {
+                        "cancel_button": {
+                            "type": "boolean"
+                        },
+                        "depends_on": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "fields": {
+                            "items": {
+                                "properties": {
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "hint": {
+                                        "type": "string"
+                                    },
+                                    "is_required": {
+                                        "type": "boolean"
+                                    },
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "lookup": {
+                                        "properties": {
+                                            "expand": {
+                                                "properties": {
+                                                    "acting_user": {
+                                                        "type": "string"
+                                                    },
+                                                    "app": {
+                                                        "type": "string"
+                                                    },
+                                                    "channel": {
+                                                        "type": "string"
+                                                    },
+                                                    "config": {
+                                                        "type": "string"
+                                                    },
+                                                    "mentioned": {
+                                                        "type": "string"
+                                                    },
+                                                    "parent_post": {
+                                                        "type": "string"
+                                                    },
+                                                    "post": {
+                                                        "type": "string"
+                                                    },
+                                                    "root_post": {
+                                                        "type": "string"
+                                                    },
+                                                    "team": {
+                                                        "type": "string"
+                                                    },
+                                                    "user": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "path": {
+                                                "type": "string"
+                                            },
+                                            "state": {}
+                                        },
+                                        "type": "object"
+                                    },
+                                    "max_length": {
+                                        "type": "number"
+                                    },
+                                    "min_length": {
+                                        "type": "number"
+                                    },
+                                    "modal_label": {
+                                        "type": "string"
+                                    },
+                                    "multiselect": {
+                                        "type": "boolean"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "options": {
+                                        "items": {
+                                            "properties": {
+                                                "icon_data": {
+                                                    "type": "string"
+                                                },
+                                                "label": {
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "position": {
+                                        "type": "number"
+                                    },
+                                    "readonly": {
+                                        "type": "boolean"
+                                    },
+                                    "refresh": {
+                                        "type": "boolean"
+                                    },
+                                    "subtype": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "anyOf": [
+                                            {
+                                                "properties": {
+                                                    "icon_data": {
+                                                        "type": "string"
+                                                    },
+                                                    "label": {
+                                                        "type": "string"
+                                                    },
+                                                    "value": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            {
+                                                "type": [
+                                                    "string",
+                                                    "boolean"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "footer": {
+                            "type": "string"
+                        },
+                        "header": {
+                            "type": "string"
+                        },
+                        "icon": {
+                            "type": "string"
+                        },
+                        "source": {
+                            "properties": {
+                                "expand": {
+                                    "properties": {
+                                        "acting_user": {
+                                            "type": "string"
+                                        },
+                                        "app": {
+                                            "type": "string"
+                                        },
+                                        "channel": {
+                                            "type": "string"
+                                        },
+                                        "config": {
+                                            "type": "string"
+                                        },
+                                        "mentioned": {
+                                            "type": "string"
+                                        },
+                                        "parent_post": {
+                                            "type": "string"
+                                        },
+                                        "post": {
+                                            "type": "string"
+                                        },
+                                        "root_post": {
+                                            "type": "string"
+                                        },
+                                        "team": {
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "path": {
+                                    "type": "string"
+                                },
+                                "state": {}
+                            },
+                            "type": "object"
+                        },
+                        "submit": {
+                            "properties": {
+                                "expand": {
+                                    "properties": {
+                                        "acting_user": {
+                                            "type": "string"
+                                        },
+                                        "app": {
+                                            "type": "string"
+                                        },
+                                        "channel": {
+                                            "type": "string"
+                                        },
+                                        "config": {
+                                            "type": "string"
+                                        },
+                                        "mentioned": {
+                                            "type": "string"
+                                        },
+                                        "parent_post": {
+                                            "type": "string"
+                                        },
+                                        "post": {
+                                            "type": "string"
+                                        },
+                                        "root_post": {
+                                            "type": "string"
+                                        },
+                                        "team": {
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "path": {
+                                    "type": "string"
+                                },
+                                "state": {}
+                            },
+                            "type": "object"
+                        },
+                        "submit_buttons": {
+                            "type": "string"
+                        },
+                        "submit_on_cancel": {
+                            "type": "boolean"
+                        },
+                        "title": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "hint": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "role_id": {
+                    "type": "string"
+                },
+                "submit": {
+                    "properties": {
+                        "expand": {
+                            "properties": {
+                                "acting_user": {
+                                    "type": "string"
+                                },
+                                "app": {
+                                    "type": "string"
+                                },
+                                "channel": {
+                                    "type": "string"
+                                },
+                                "config": {
+                                    "type": "string"
+                                },
+                                "mentioned": {
+                                    "type": "string"
+                                },
+                                "parent_post": {
+                                    "type": "string"
+                                },
+                                "post": {
+                                    "type": "string"
+                                },
+                                "root_post": {
+                                    "type": "string"
+                                },
+                                "team": {
+                                    "type": "string"
+                                },
+                                "user": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "path": {
+                            "type": "string"
+                        },
+                        "state": {}
+                    },
+                    "type": "object"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

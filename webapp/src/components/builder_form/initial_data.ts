@@ -1,4 +1,4 @@
-import {AppForm} from '@mattermost/types/lib/apps';
+import {AppBinding, AppForm} from '@mattermost/types/lib/apps';
 
 export const zoom = {
     backend: {
@@ -245,24 +245,130 @@ const docsListItem = {
     ]
 };
 
+type Document = {
+    label: string;
+    id: string;
+}
+const makeDocumentList = (documents: Document[]) => {
+    return {
+        "type": "list_block",
+        "location": "document-list",
+        "bindings": documents.map((document): AppBinding => ({
+            app_id: 'docs',
+            location: document.id,
+            label: document.label,
+            "description": "4:30 PM · Opened by me",
+            "icon": "https://imgs.search.brave.com/kqSpoYPsNG6ZF3Sdk5LbAFl6u2YHiZMKPwKWBgolodQ/rs:fit:512:512:1/g:ce/aHR0cDovL2ljb25z/Lmljb25hcmNoaXZl/LmNvbS9pY29ucy9w/YXBpcnVzLXRlYW0v/cGFwaXJ1cy1hcHBz/LzUxMi9nb29nbGUt/ZG9jcy1pY29uLnBu/Zw",
+            submit: {
+                path: '/actions/open-file',
+                state: {
+                    id: document.id,
+                },
+            },
+            "bindings": [{
+                app_id: 'drive',
+                "type": "actions",
+                "bindings": [
+                    {
+                        app_id: 'drive',
+                        "label": "Open",
+                        "submit": {
+                            "path": "/actions/open-file",
+                            "state": {
+                                id: document.id,
+                            }
+                        },
+                    },
+                    {
+                        app_id: 'drive',
+                        "label": "Share",
+                        "submit": {
+                            "path": "/actions/share-file",
+                            "state": {
+                                id: document.id,
+                            }
+                        }
+                    },
+                    {
+                        app_id: 'drive',
+                        "label": "Delete",
+                        form: {
+                            title: 'Confirm File Delete',
+                            submit: {
+                                "path": "/actions/delete-file",
+                                "state": {
+                                    id: document.id,
+                                },
+                            },
+                            fields: [
+                                {
+                                    name: 'markdown',
+                                    type: 'markdown',
+                                    description: 'File ' + document.label,
+                                },
+                                {
+                                    name: 'submit_buttons',
+                                    type: 'static_select',
+                                    options: [
+                                        {
+                                            label: 'Confirm',
+                                            value: 'confirm',
+                                        },
+                                    ]
+                                }
+                            ],
+                            submit_buttons: 'submit_buttons',
+                        } as AppForm,
+                    },
+                ]
+            }]
+        })),
+    };
+}
+
 const docsView = {
     "app_id": "app-view-builder-app",
     "label": "Docs",
     "type": "view",
+    "location": "rhs",
     "bindings": [
         {
-            "type": "view",
+            "type": "select",
+            "variant": "categories",
             "bindings": [
                 {
-                    "type": "list_block",
+                    "location": "my_drive",
                     "label": "My Drive",
-                    "bindings": [
-                        docsListItem,
-                        {...docsListItem, label: docsListItem.label + ' 2'},
-                    ]
-                }
-            ]
-        }
+                    "selected": true,
+                    "submit": {
+                        "path": "/views/home/refresh/document-list",
+                        state: {
+                            document_id: 'my_drive',
+                        },
+                    },
+                },
+                {
+                    "location": "shared_with_me",
+                    "label": "Shared With Me",
+                    "submit": {
+                        "path": "/views/home/refresh/document-list",
+                        state: {
+                            document_id: 'shared_with_me',
+                        },
+                    },
+                },
+            ],
+        },
+        makeDocumentList([
+            {
+                label: 'My Document 1',
+                id: 'my_document_1',
+            },
+            {
+                label: 'My Document 2',
+                id: 'my_document_2',
+            },
+        ]),
     ]
 };
 
@@ -284,6 +390,19 @@ export const docs = {
             },
             "/views/home": {
                 "data": docsView,
+            },
+            "/views/home/refresh/document-list": {
+                type: 'view',
+                data: makeDocumentList([
+                    {
+                        label: 'Other doc 1',
+                        id: 'other_doc_1',
+                    },
+                    {
+                        label: 'Other doc 2',
+                        id: 'other_doc_2',
+                    },
+                ]),
             },
         },
         "bindings": [

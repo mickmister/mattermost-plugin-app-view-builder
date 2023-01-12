@@ -58,8 +58,6 @@ export default function BuilderForm() {
         const back = JSON.stringify(template.backend, null, 2)
         setBackendText(back);
         backendTextRef.current = back;
-
-        handleRun();
     }, [selectedTemplate]);
 
     const onEditorDidMount = useMonaco();

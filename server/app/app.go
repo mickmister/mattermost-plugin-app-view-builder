@@ -9,6 +9,7 @@ import (
 	"github.com/mattermost/mattermost-plugin-apps/apps/goapp"
 	"github.com/mattermost/mattermost-plugin-apps/utils"
 	"github.com/mattermost/mattermost-plugin-apps/utils/httputils"
+	"github.com/pkg/errors"
 )
 
 type Template struct {
@@ -93,6 +94,22 @@ func Init(client *pluginapi.Client, template *Template) *App {
 	}
 
 	registerOldGoappRoutes(gop)
+
+	gop.HandleCall("/views/home/refresh/document-list", func(cr goapp.CallRequest) apps.CallResponse {
+		type state struct {
+			DriveID string `json:"drive_id"`
+		}
+
+		binding, err := makeDocumentListBlock(cr)
+		if err != nil {
+			return apps.NewErrorResponse(errors.Wrap(err, "failed to create document list"))
+		}
+
+		return apps.CallResponse{
+			Type: "view",
+			Data: binding,
+		}
+	})
 
 	return &App{
 		Goapp:           gop,
